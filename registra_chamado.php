@@ -1,5 +1,7 @@
 <?php
 
+    session_start();
+
     // montagem do texto
     // para nao ocorrer o problema de o texto haver ###
     $titulo = str_replace('#', '-', $_POST['titulo']);
@@ -8,7 +10,7 @@
 
     //separar por #
         // outra solução seria com implodee('#', $_POST);
-    $texto = $titulo . '#' . $categoria . '#' . $descricao . PHP_EOL; // PHP_EndOfLine!!
+    $texto = $_SESSION['id'] . '#' . $titulo . '#' . $categoria . '#' . $descricao . PHP_EOL; // PHP_EndOfLine!!
 
     // abrindo
     $arquivo = fopen('arquivo.hd', 'a'); // dois parametros('nome.extension', 'ler/escrever/hover...');

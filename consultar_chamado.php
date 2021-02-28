@@ -60,6 +60,14 @@
 
                   <? $c_dados = explode('#', $c);
 
+                  //verificar se perfil é adm
+                  if($_SESSION['perfil_id'] == 2) {
+                      // exibir chamados somente se foi criado pelo usuário
+                      if($_SESSION['perfil_id'] != $c_dados[0]) {
+                          continue;
+                      }
+                  }
+
                   if(count($c_dados) < 3) { // faltar alguma info (pula interação)
                       continue;
                   }
@@ -67,9 +75,9 @@
 
               <div class="card mb-3 bg-light">
                 <div class="card-body">
-                  <h5 class="card-title"><?= $c_dados[0]; ?></h5>
-                  <h6 class="card-subtitle mb-2 text-muted"><?= $c_dados[1]; ?></h6>
-                  <p class="card-text"><?= $c_dados[2]; ?></p>
+                  <h5 class="card-title"><?= $c_dados[1]; ?></h5> <!-- omitir o id -->
+                  <h6 class="card-subtitle mb-2 text-muted"><?= $c_dados[2]; ?></h6>
+                  <p class="card-text"><?= $c_dados[3]; ?></p>
                 </div>
               </div>
 
