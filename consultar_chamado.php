@@ -1,5 +1,20 @@
 <? require_once "validador_acesso.php"; ?>
 
+<?php
+    $chamados = array();
+
+    $arquivo = fopen('arquivo.hd', 'r'); // 'r' to read
+
+// feof -> testa fim do arquivo e retorn false se não encontro o fim na linha
+    while(!feof($arquivo)) {
+        $registro = fgets($arquivo); // pega toda a linha onde está o ponteiro no momento
+        $chamados[] = $registro;
+    }
+
+    fclose($arquivo);
+
+?>
+
 <html>
   <head>
     <meta charset="utf-8" />
@@ -40,24 +55,25 @@
             </div>
             
             <div class="card-body">
-              
+
+              <?php foreach ($chamados as $c) { ?>
+
+                  <? $c_dados = explode('#', $c);
+
+                  if(count($c_dados) < 3) { // faltar alguma info (pula interação)
+                      continue;
+                  }
+                  ?>
+
               <div class="card mb-3 bg-light">
                 <div class="card-body">
-                  <h5 class="card-title">Título do chamado...</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Categoria</h6>
-                  <p class="card-text">Descrição do chamado...</p>
-
+                  <h5 class="card-title"><?= $c_dados[0]; ?></h5>
+                  <h6 class="card-subtitle mb-2 text-muted"><?= $c_dados[1]; ?></h6>
+                  <p class="card-text"><?= $c_dados[2]; ?></p>
                 </div>
               </div>
 
-              <div class="card mb-3 bg-light">
-                <div class="card-body">
-                  <h5 class="card-title">Título do chamado...</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Categoria</h6>
-                  <p class="card-text">Descrição do chamado...</p>
-
-                </div>
-              </div>
+                <? } ?>
 
               <div class="row mt-5">
                 <div class="col-6">

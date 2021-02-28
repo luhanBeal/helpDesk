@@ -17,4 +17,11 @@
     fwrite($arquivo, $texto); // 2 par ('qual_arq', "oq_escrever");
     // fechando
     fclose($arquivo);
+
+    header('Location: abrir_chamado.php');
+
+    /*
+     seria interessante direcionar para uma página de confirmação do chamao
+    */
+
 ?>
